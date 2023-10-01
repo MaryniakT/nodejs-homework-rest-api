@@ -23,24 +23,24 @@ const addSchema = Joi.object({
   favorite: Joi.boolean(),
 });
 
-const addUpdSchema = Joi.object({
-  name: Joi.string()
-    .min(3)
-    .max(25)
-    .messages({ "any.required": "missing required name field" }),
-  email: Joi.string()
-    .trim()
-    .email()
-    .messages({ "any.required": "missing required email field" }),
-  phone: Joi.string()
-    .pattern(dataRegexp)
-    .messages({
-      messages:
-        "Invalid phone number format. Please fill a valid phone number (000) 000-0000.",
-    })
-    .messages({ "any.required": "missing required phone field" }),
-  favorite: Joi.boolean(),
-});
+// const addUpdSchema = Joi.object({
+//   name: Joi.string()
+//     .min(3)
+//     .max(25)
+//     .messages({ "any.required": "missing required name field" }),
+//   email: Joi.string()
+//     .trim()
+//     .email()
+//     .messages({ "any.required": "missing required email field" }),
+//   phone: Joi.string()
+//     .pattern(dataRegexp)
+//     .messages({
+//       messages:
+//         "Invalid phone number format. Please fill a valid phone number (000) 000-0000.",
+//     })
+//     .messages({ "any.required": "missing required phone field" }),
+//   favorite: Joi.boolean(),
+// });
 
 const favoriteSchema = Joi.object({
   favorite: Joi.boolean()
@@ -50,7 +50,6 @@ const favoriteSchema = Joi.object({
 
 const schemas = {
   addSchema,
-  addUpdSchema,
   favoriteSchema,
   dataRegexp,
 };
