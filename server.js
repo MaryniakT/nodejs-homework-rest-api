@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const { DB_HOST, PORT = 3000 } = process.env;
 
 mongoose
-  .connect("mongodb+srv://tetiana:daf210489@cluster0.h3bmdzb.mongodb.net/")
+  .connect(DB_HOST)
   .then(() =>
     app.listen(PORT, () => {
       console.log("Database connection successful");
