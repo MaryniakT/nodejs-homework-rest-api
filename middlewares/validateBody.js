@@ -6,8 +6,13 @@ const validateBody = (schema) => {
     if (Object.keys(body).length === 0) {
       throw HttpError(400, 'missing fields');
     }
-    if (req.body.favorite === undefined) {
+    
+     if (req.body.favorite === undefined) {
       return res.status(400).json({ message: "Missing field favorite" });
+    }
+
+    if (typeof req.body.favorite !== "boolean") {
+      return res.status(400).json({ message: "Invalid type for favorite" });
     }
 
 
