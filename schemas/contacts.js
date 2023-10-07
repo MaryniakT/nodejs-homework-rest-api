@@ -42,15 +42,15 @@ const addSchema = Joi.object({
 //   favorite: Joi.boolean(),
 // });
 
-// const favoriteSchema = Joi.object({
-//   favorite: Joi.boolean()
-//     .required()
-//     .messages({ "any.required": "missing required field favorite" }),
-// });
+const favoriteSchema = Joi.object({
+  favorite: Joi.boolean()
+    .required()
+    .messages({ "any.required": "missing required field favorite" }),
+});
 
 const schemas = {
   addSchema,
-  // favoriteSchema,
+  favoriteSchema,
   // dataRegexp,
 };
 module.exports = { schemas };
