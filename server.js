@@ -1,16 +1,17 @@
 const app = require("./app");
 const mongoose = require("mongoose");
-// mongoose.set("strictQuery", true);
+
 
 const { DB_HOST, PORT = 3000 } = process.env;
 
 mongoose
   .connect(DB_HOST)
-  .then(() => {
-    console.log("Database connection successful");
-    app.listen(PORT);
-  })
+  .then(() =>
+    app.listen(PORT, () => {
+      console.log("Database connection successful");
+    })
+  )
   .catch((error) => {
-    console.log(error.message);
+    console.error("Error connecting to MongoDB: ", error.message);
     process.exit(1);
   });
