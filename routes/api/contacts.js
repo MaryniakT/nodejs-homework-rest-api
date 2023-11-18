@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get("/", authenticate, ctrl.getAll);
 
-router.post("/", authenticate, validateBody(schemas.addSchema), ctrl.add);
+router.post("/",authenticate,validateBody(schemas.addSchema), ctrl.add);
 
 router.delete("/:id", authenticate, isValidId, ctrl.deleteById);
 

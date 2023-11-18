@@ -11,15 +11,15 @@ const authorization = async (req, res, next) => {
     next(HttpError(401));
   }
 
-  try {
+   try {
     const { id } = jwt.verify(token, SECRET_KEY);
     const user = await User.findById(id);
-    if (!user) {
-      next(HttpError(401, "User not found"));
+    if (!user || !user.token || user.token !== token) {
+      next(HttpError(401));
     }
     req.user = user;
     next();
-  } catch {
+  } catch (error) {
     next(HttpError(401));
   }
 };
