@@ -5,33 +5,47 @@ const Joi = require("joi");
 const emailRegexp = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
 const userSchema = new Schema(
-    {
-        password: {
-            type: String, 
-            required: [true, "Password is required"],
-        },
-        email: {
-            type: String, 
-            required: [true, "Email is required"],
-            unique: true,
-        },
-        subscription: {
-            type: String,
-            enum: ["starter", "pro", "business"],
-            default: "starter",
-        },
-        token: { type: String, default: false },
+  {
+    name: {
+      type: String,
+      minLength: 2,
+      required: [true, "Set name for user"],
+      default: "Guest",
     },
-    { versionKey: false, timestamps: true }
+    email: {
+      type: String,
+      required: [true, "Email is required"],
+      match: [emailRegexp, "Please fill a valid email address"],
+      unique: true,
+    },
+    password: {
+      type: String,
+      minLength: 6,
+      required: [true, "Set password for user"],
+    },
+    subscription: {
+      type: String,
+      enum: ["starter", "pro", "business"],
+      default: "starter",
+    },
+    token: {
+      type: String,
+      default: null,
+    },
+  },
+  { versionKey: false, timestamps: true }
 );
 
 const registerSchema = Joi.object({
-  password: Joi.string().min(4).max(25).required().messages({ "any.required": "Ошибка от Joi или другой библиотеки валидации" }),
-  email: Joi.string().pattern(new RegExp(emailRegexp)).required().messages({ "any.required": "Ошибка от Joi или другой библиотеки валидации" }),
+    name: Joi.string().required(),
+    email: Joi.string().required(),
+    password: Joi.string().required(),
+    subscription: Joi.string().required(),
 });
 
 const loginSchema = Joi.object({
-  subscription: Joi.string().valid("starter", "pro", "business"),
+   email: Joi.string().required(),
+   password: Joi.string().required(),
 });
 
 const schemas = { registerSchema, loginSchema };
