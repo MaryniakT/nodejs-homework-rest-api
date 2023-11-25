@@ -4,7 +4,6 @@ const gravatar = require("gravatar");
 const jimp = require("jimp");
 const fs = require("fs/promises");
 const path = require("path");
-// const { nanoid } = require("nanoid");
 
 const { User } = require("../models/users");
 
